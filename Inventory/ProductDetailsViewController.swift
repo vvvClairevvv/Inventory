@@ -41,7 +41,8 @@ class ProductDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)        displayProductInfoFor()
+        super.viewWillAppear(animated)
+        displayProductInfoFor()
     }
     func startNetWorkIndicator() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
