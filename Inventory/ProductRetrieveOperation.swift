@@ -36,8 +36,6 @@ class ProductRetrieveOperation: AnyObject {
             } else if let httpResponse = response  as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
                     let result = self.deserializeFetchedData(data: data)
-                    print("------------ successfully ------------\n")
-                    print(result)
                     successHandler(result)
                 }
             }
@@ -51,12 +49,8 @@ class ProductRetrieveOperation: AnyObject {
         do {
             guard let data = data else { return nil }
             fetchedJson = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
-            print("fetched JSON -------\n")
-            print(fetchedJson)
-            print("fetched JSON end -------\n")
-
         } catch {
-            print(error)
+            print("deserializatino error : \(error)")
             return nil
         }
         guard let json = fetchedJson else {return nil}

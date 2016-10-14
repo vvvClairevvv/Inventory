@@ -31,7 +31,6 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wgl-YD-bNn">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="CgH-o3-KVu"/>
                                                         <constraint firstAttribute="width" constant="80" id="eKZ-w9-Vlw"/>
                                                     </constraints>
                                                 </imageView>
@@ -88,8 +87,8 @@
                                                 <constraint firstAttribute="bottom" secondItem="Stw-6E-6a6" secondAttribute="bottom" constant="20" id="QyC-tC-Shc"/>
                                                 <constraint firstItem="QnF-Z7-k4d" firstAttribute="top" secondItem="Bmf-Mk-N0B" secondAttribute="top" id="Soa-Wi-U86"/>
                                                 <constraint firstAttribute="bottom" secondItem="QnF-Z7-k4d" secondAttribute="bottom" constant="20" id="Vh3-rU-WVl"/>
-                                                <constraint firstAttribute="bottom" secondItem="wgl-YD-bNn" secondAttribute="bottom" constant="20" id="mNv-Kz-7ON"/>
-                                                <constraint firstItem="wgl-YD-bNn" firstAttribute="top" secondItem="Bmf-Mk-N0B" secondAttribute="top" constant="20" id="oPk-Is-LeV"/>
+                                                <constraint firstAttribute="bottom" secondItem="wgl-YD-bNn" secondAttribute="bottom" constant="10" id="mNv-Kz-7ON"/>
+                                                <constraint firstItem="wgl-YD-bNn" firstAttribute="top" secondItem="Bmf-Mk-N0B" secondAttribute="top" constant="10" id="oPk-Is-LeV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

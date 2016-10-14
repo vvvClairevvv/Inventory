@@ -72,7 +72,3 @@ class ProductListViewController: UIViewController, UITableViewDelegate, ProductL
         showLoading()
     }
 }
-
-
-
-

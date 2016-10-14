@@ -76,18 +76,11 @@ class ProductListDataSource: NSObject, UITableViewDataSource {
 
 extension ProductListDataSource: ProductListViewModelObserver {
     func didSuccessfullyFetchProduct() {
-//        DispatchQueue.main.async {
-//            self.tableView?.reloadData()
-//        }
-        
         observer?.didSuccessfullyFetchNewProducts()
     }
     
     func didFinishDownloadImageAt(indexPath: NSIndexPath) {
         observer?.didFinishDownloadingImageAtIndexPath(indexPath: indexPath)
-//        DispatchQueue.main.async {
-//            self.tableView?.reloadRows(at: [indexPath as IndexPath], with: .none)
-//        }
     }
 }
 

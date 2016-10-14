@@ -24,7 +24,7 @@ class StringUtility: AnyObject {
             
             decodedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
         } catch {
-            print(error)
+            print("stringFromHTML error : \(error)")
             return ""
         }
         

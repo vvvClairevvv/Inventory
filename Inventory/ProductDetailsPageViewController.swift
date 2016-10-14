@@ -42,8 +42,6 @@ class ProductDetailsPageViewController: UIPageViewController, UIPageViewControll
     
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print("after gets called\n")
-
         guard let vc = viewController  as? ProductDetailsViewController else {return nil}
         
         guard let index = vc.currentItemIndex else {return nil}
@@ -55,25 +53,9 @@ class ProductDetailsPageViewController: UIPageViewController, UIPageViewControll
         return afterVC
     }
     
-    
-    private func fetchProductsAsNeeded() {
-        
-    }
-    
-    
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
-        if (completed && finished) {
-
-        }
-    }
-    
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         guard let vc = pendingViewControllers.first as? ProductDetailsViewController else{return}
-        print("pending view controllers")
-        print(pendingViewControllers)
-        
-        print("end")
+
         guard let index = vc.currentItemIndex else {return}
         
         if (index >= ProductManager.sharedProductManager.productCount - 1 && ProductFetcher.sharedInstance.hasNextPage) {
@@ -81,11 +63,9 @@ class ProductDetailsPageViewController: UIPageViewController, UIPageViewControll
             ProductFetcher.sharedInstance.fetchNextBatch(successHandler: { (result) in
                 DispatchQueue.main.async {
                     vc.stopNetworIndicator()
-                    print("Page View Controller fetched")
-
                 }
                 }, failureHandler: { (error) in
-                    print("Page VIEW CONTROLLER ERROR")
+                    print("fetch failed with error : \(error.localizedDescription)")
             })
         }
         

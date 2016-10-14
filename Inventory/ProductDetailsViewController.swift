@@ -35,9 +35,6 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-        
-        print("currentIndex is : \(currentItemIndex)")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
