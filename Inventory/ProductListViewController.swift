@@ -17,7 +17,6 @@ class ProductListViewController: UIViewController, UITableViewDelegate{
     }
     
     lazy var dataSouorce: ProductListDataSource  = {return ProductListDataSource(tableView: self.tableView)}()
-    lazy var productFetcher: ProductFetcher = { return ProductFetcher(pageSize: 30) }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +44,8 @@ class ProductListViewController: UIViewController, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: ProductDetailsViewController.identifier) as? ProductDetailsViewController else {return}
+        guard let vc = storyboard.instantiateViewController(withIdentifier: ProductDetailsPageViewController.identifier) as? ProductDetailsPageViewController else {return}
+        
         vc.currentItemIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: false)
     }

@@ -19,13 +19,41 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var stockLabel: UILabel!
     @IBOutlet weak var longDescriptionLabel: UILabel!
     
+    @IBOutlet weak var loadingView: UIView! {
+        didSet{
+            self.loadingView.isHidden = true
+        }
+    }
+    
+    lazy var downloadSession: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
+        return session
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
-        displayProductInfoFor()
         
+        print("currentIndex is : \(currentItemIndex)")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)        displayProductInfoFor()
+    }
+    func startNetWorkIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.loadingView.isHidden = false
+    }
+    
+    func stopNetworIndicator() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        self.loadingView.isHidden = true
+        self.view.layoutIfNeeded()
+        displayProductInfoFor()
+
     }
     
     func displayProductInfoFor() {
@@ -36,7 +64,19 @@ class ProductDetailsViewController: UIViewController {
         priceLabel?.text = product.price
         stockLabel?.text = product.stockStateString
         longDescriptionLabel?.text = StringUtility.stringFromHTML(string: product.longDescription)
-        productImageView?.image = product.image
+        
+        guard let image = product.image else
+        {
+            guard let imageURLString = product.productImage else {return}
+            let downloader = ImageDownloader()
+            downloader.downloadImageForURL(downloadSession: downloadSession, imageURLString: imageURLString, completionHandler: { (image) in
+                DispatchQueue.main.async {
+                    self.productImageView?.image = image
+                }
+            })
+            return
+        }
+        productImageView?.image = image
         
     }
     

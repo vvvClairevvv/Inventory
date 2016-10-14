@@ -22,6 +22,8 @@
 		7E39E9EF1DAEF4E100F34C6D /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */; };
 		7E39EA111DB06E3C00F34C6D /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */; };
 		7E39EA131DB09B1F00F34C6D /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA121DB09B1F00F34C6D /* StringUtility.swift */; };
+		7E39EA171DB0AAE900F34C6D /* ProductDetailsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA161DB0AAE900F34C6D /* ProductDetailsPageViewController.swift */; };
+		7E39EA191DB0DC6D00F34C6D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA181DB0DC6D00F34C6D /* ImageDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		7E39EA121DB09B1F00F34C6D /* StringUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
+		7E39EA161DB0AAE900F34C6D /* ProductDetailsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsPageViewController.swift; sourceTree = "<group>"; };
+		7E39EA181DB0DC6D00F34C6D /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 				7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */,
 				7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */,
 				7E39EA121DB09B1F00F34C6D /* StringUtility.swift */,
+				7E39EA161DB0AAE900F34C6D /* ProductDetailsPageViewController.swift */,
+				7E39EA181DB0DC6D00F34C6D /* ImageDownloader.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -168,6 +174,7 @@
 			files = (
 				7E39E9EB1DAEEAE200F34C6D /* ProductListDataSource.swift in Sources */,
 				7E39E9EF1DAEF4E100F34C6D /* ProductManager.swift in Sources */,
+				7E39EA191DB0DC6D00F34C6D /* ImageDownloader.swift in Sources */,
 				7E39EA111DB06E3C00F34C6D /* ProductDetailsViewController.swift in Sources */,
 				7E39E9DF1DADEA1F00F34C6D /* ProductRetrieveResult.swift in Sources */,
 				7E39E9E11DADEB1600F34C6D /* ProductRetrieveOperation.swift in Sources */,
@@ -177,6 +184,7 @@
 				7E39E9ED1DAEEBEB00F34C6D /* ProductListViewModel.swift in Sources */,
 				7E39E9E51DADFD8200F34C6D /* ProductListViewController.swift in Sources */,
 				7E39E9E31DADFB2800F34C6D /* ProductListTableViewCell.swift in Sources */,
+				7E39EA171DB0AAE900F34C6D /* ProductDetailsPageViewController.swift in Sources */,
 				7E39E9E71DAE026600F34C6D /* ProductFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

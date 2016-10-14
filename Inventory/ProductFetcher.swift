@@ -9,7 +9,10 @@
 import UIKit
 
 let fetchBatchSize: CGFloat = 30
+
 class ProductFetcher: AnyObject {
+    static let sharedInstance = ProductFetcher(pageSize: 30)
+    
     var fetchedPageNumber = 0
     let pageSize: CGFloat
     private (set) var hasNextPage: Bool = true
@@ -29,6 +32,7 @@ class ProductFetcher: AnyObject {
         let operation = ProductRetrieveOperation(pageNumber: "\(pageNumber)", pageSize: "\(pageSize)")
         operation.fetch(successHandler: { [weak self](result: ProductRetrieveResult?) in
             self?.updateFetcherStateWithResult(result: result)
+            ProductManager.sharedProductManager.updateProduct(newProducts: result?.products)
             successHandler(result)
             }, failureHandler: { [weak self] (error) in
                 self?.isFetching = false

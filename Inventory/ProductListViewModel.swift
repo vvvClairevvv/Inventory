@@ -18,6 +18,7 @@ class ProductListViewModel {
     weak var tableView: UITableView?
     let productManager: ProductManager
     weak var observer: ProductListViewModelObserver?
+    
     lazy var downloadSession: URLSession = {
         let configuration = URLSessionConfiguration.default
         let session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
@@ -26,14 +27,14 @@ class ProductListViewModel {
     
     init(tableView: UITableView?) {
         self.tableView = tableView
-        self.fetcher = ProductFetcher(pageSize: fetchBatchSize)
+        self.fetcher = ProductFetcher.sharedInstance
         self.productManager = ProductManager.sharedProductManager
     }
     
     func loadNextBatchOfProducts() {
         if (fetcher.hasNextPage && !fetcher.isFetching) {
             fetcher.fetchNextBatch(successHandler: {(result: ProductRetrieveResult?) in
-                self.updateProductModelOnSuccessWithResult(result: result)
+//                self.updateProductModelOnSuccessWithResult(result: result)
                 self.observer?.didSuccessfullyFetchProduct()
                 }, failureHandler: { (error) in
                     print(error)
@@ -69,53 +70,14 @@ class ProductListViewModel {
             return image
         }else {
             guard let imageURLString = product.productImage else {return nil}
-            guard let imageURL = URL(string: imageURLString) else {return nil}
-
-
-            let downloadTask = self.downloadSession.downloadTask(with: imageURL as URL, completionHandler: { (location, response, error) in
-                guard let location = location else {return}
-                guard let data = try? Data(contentsOf: location) else {return}
-                let downloadImage = UIImage(data: data)
-                
-                let fileManager = FileManager.default
-                
-                guard let desitinationPathURL = self.localPathForUrl(imageURLString: imageURLString) else {return}
-
-                do {
-                    try fileManager.copyItem(at: location, to:desitinationPathURL as URL)
-                }catch {
-                    print("Failed to copy file : \(error.localizedDescription)")
-                }
-                
-                DispatchQueue.main.async {
-                    product.image = downloadImage
-                    self.observer?.didFinishDownloadImageAt(indexPath: indexPath)
-                }
+            let downloader = ImageDownloader()
+            downloader.downloadImageForURL(downloadSession: self.downloadSession, imageURLString: imageURLString, completionHandler: { (image) in
+                product.image = image
+                self.observer?.didFinishDownloadImageAt(indexPath: indexPath)
             })
-            
-            downloadTask.resume()
-            
             return nil
-            
         }
         
     }
-    
-
-    func updateProductModelOnSuccessWithResult(result: ProductRetrieveResult?) {
-        productManager.updateProduct(newProducts: result?.products)
-    }
-    
-    private func localPathForUrl(imageURLString: String) -> NSURL? {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        if let url = NSURL(string: imageURLString), let lastPathComponent = url.lastPathComponent {
-            let fullPath = documentsPath.appendingPathComponent(lastPathComponent)
-            return NSURL(fileURLWithPath:fullPath)
-        }
-        return nil
-    }
-    
-
-
 }
 
