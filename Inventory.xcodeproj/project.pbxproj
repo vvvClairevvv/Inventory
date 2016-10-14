@@ -20,6 +20,8 @@
 		7E39E9EB1DAEEAE200F34C6D /* ProductListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9EA1DAEEAE200F34C6D /* ProductListDataSource.swift */; };
 		7E39E9ED1DAEEBEB00F34C6D /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9EC1DAEEBEB00F34C6D /* ProductListViewModel.swift */; };
 		7E39E9EF1DAEF4E100F34C6D /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */; };
+		7E39EA111DB06E3C00F34C6D /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */; };
+		7E39EA131DB09B1F00F34C6D /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EA121DB09B1F00F34C6D /* StringUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		7E39E9EA1DAEEAE200F34C6D /* ProductListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListDataSource.swift; sourceTree = "<group>"; };
 		7E39E9EC1DAEEBEB00F34C6D /* ProductListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
+		7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		7E39EA121DB09B1F00F34C6D /* StringUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 				7E39E9EA1DAEEAE200F34C6D /* ProductListDataSource.swift */,
 				7E39E9EC1DAEEBEB00F34C6D /* ProductListViewModel.swift */,
 				7E39E9EE1DAEF4E100F34C6D /* ProductManager.swift */,
+				7E39EA101DB06E3C00F34C6D /* ProductDetailsViewController.swift */,
+				7E39EA121DB09B1F00F34C6D /* StringUtility.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -162,8 +168,10 @@
 			files = (
 				7E39E9EB1DAEEAE200F34C6D /* ProductListDataSource.swift in Sources */,
 				7E39E9EF1DAEF4E100F34C6D /* ProductManager.swift in Sources */,
+				7E39EA111DB06E3C00F34C6D /* ProductDetailsViewController.swift in Sources */,
 				7E39E9DF1DADEA1F00F34C6D /* ProductRetrieveResult.swift in Sources */,
 				7E39E9E11DADEB1600F34C6D /* ProductRetrieveOperation.swift in Sources */,
+				7E39EA131DB09B1F00F34C6D /* StringUtility.swift in Sources */,
 				7E39E9CB1DADDEA600F34C6D /* AppDelegate.swift in Sources */,
 				7E39E9DD1DADE82500F34C6D /* Product.swift in Sources */,
 				7E39E9ED1DAEEBEB00F34C6D /* ProductListViewModel.swift in Sources */,

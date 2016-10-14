@@ -27,7 +27,7 @@ class ProductListViewModel {
     init(tableView: UITableView?) {
         self.tableView = tableView
         self.fetcher = ProductFetcher(pageSize: fetchBatchSize)
-        self.productManager = ProductManager()
+        self.productManager = ProductManager.sharedProductManager
     }
     
     func loadNextBatchOfProducts() {
@@ -70,10 +70,23 @@ class ProductListViewModel {
         }else {
             guard let imageURLString = product.productImage else {return nil}
             guard let imageURL = URL(string: imageURLString) else {return nil}
+
+
             let downloadTask = self.downloadSession.downloadTask(with: imageURL as URL, completionHandler: { (location, response, error) in
                 guard let location = location else {return}
                 guard let data = try? Data(contentsOf: location) else {return}
                 let downloadImage = UIImage(data: data)
+                
+                let fileManager = FileManager.default
+                
+                guard let desitinationPathURL = self.localPathForUrl(imageURLString: imageURLString) else {return}
+
+                do {
+                    try fileManager.copyItem(at: location, to:desitinationPathURL as URL)
+                }catch {
+                    print("Failed to copy file : \(error.localizedDescription)")
+                }
+                
                 DispatchQueue.main.async {
                     product.image = downloadImage
                     self.observer?.didFinishDownloadImageAt(indexPath: indexPath)
@@ -93,29 +106,16 @@ class ProductListViewModel {
         productManager.updateProduct(newProducts: result?.products)
     }
     
-    private func convertDataToSomething(data: Data?) -> String {
-        return ""
+    private func localPathForUrl(imageURLString: String) -> NSURL? {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        if let url = NSURL(string: imageURLString), let lastPathComponent = url.lastPathComponent {
+            let fullPath = documentsPath.appendingPathComponent(lastPathComponent)
+            return NSURL(fileURLWithPath:fullPath)
+        }
+        return nil
     }
     
-    private func attributedStringFromHTML( string: String) -> String?
-    {
-        let decodedString: NSAttributedString
-        do{
 
-            let encodedData = string.data(using: String.Encoding.utf8)!
-            let attributedOptions : [String: Any] = [
-                NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType ,
-                NSCharacterEncodingDocumentAttribute: NSNumber(value: String.Encoding.utf8.rawValue)
-            ]
-
-                decodedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
-            } catch {
-                print(error)
-                return ""
-            }
-
-            return decodedString.string
-    }
 
 }
 

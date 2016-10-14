@@ -10,6 +10,7 @@ import UIKit
 
 class ProductManager: AnyObject {
     private var products: [Product]
+    static let sharedProductManager = ProductManager()
     var productCount: Int {
         get {
             return products.count

@@ -47,19 +47,7 @@ class ProductListDataSource: NSObject, UITableViewDataSource {
         viewModel.loadNextBatchOfProducts()
     }
     
-    private func configureCell(tableViewCell: ProductListTableViewCell, indexPath: NSIndexPath) {
-        tableViewCell.productNameLabel?.text = viewModel.productNameText(indexPath: indexPath)
-        tableViewCell.productImageView?.image = viewModel.imageAtIndexPath(indexPath: indexPath)
-        tableViewCell.reviewLabel?.text = viewModel.productReviewText(indexPath: indexPath)
-        tableViewCell.priceLabel?.text = viewModel.priceText(indexPath: indexPath)
-    }
-
-    
-}
-
-extension ProductListDataSource: UITableViewDelegate
-{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func handleScrolling() {
         guard let tableView = self.tableView else {return}
         
         guard let lastVisibleRowIndexPath = tableView.indexPathsForVisibleRows?.last else {return}
@@ -69,13 +57,15 @@ extension ProductListDataSource: UITableViewDelegate
             viewModel.loadNextBatchOfProducts()
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+    private func configureCell(tableViewCell: ProductListTableViewCell, indexPath: NSIndexPath) {
+        tableViewCell.productNameLabel?.text = viewModel.productNameText(indexPath: indexPath)
+        tableViewCell.productImageView?.image = viewModel.imageAtIndexPath(indexPath: indexPath)
+        tableViewCell.reviewLabel?.text = viewModel.productReviewText(indexPath: indexPath)
+        tableViewCell.priceLabel?.text = viewModel.priceText(indexPath: indexPath)
     }
+
+    
 }
-
-
 
 extension ProductListDataSource: ProductListViewModelObserver {
     func didSuccessfullyFetchProduct() {

@@ -43,5 +43,8 @@ class Product {
     }
 }
 
-
-
+extension Product {
+    var stockStateString: String {
+        return (inStock != nil) ? (inStock! == true ? "In Stock" : "Out of Stock") : ("Unknown Stock State")
+    }
+}
