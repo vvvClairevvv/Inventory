@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol ProductListDataSourceObserver: class {
+    func didSuccessfullyFetchNewProducts()
+    func didFinishDownloadingImageAtIndexPath(indexPath: NSIndexPath)
+    func didInitiateDownloading()
+}
+
 class ProductListDataSource: NSObject, UITableViewDataSource {
     weak var tableView: UITableView?
-    
+    var observer: ProductListDataSourceObserver?
     lazy var viewModel: ProductListViewModel = {
         let vm = ProductListViewModel(tableView: self.tableView)
         vm.observer = self
@@ -54,6 +60,7 @@ class ProductListDataSource: NSObject, UITableViewDataSource {
         let lastFetchedProductIndex = viewModel.productManager.productCount - 1
         
         if(lastFetchedProductIndex <= lastVisibleRowIndexPath.row) {
+            observer?.didInitiateDownloading()
             viewModel.loadNextBatchOfProducts()
         }
     }
@@ -69,15 +76,18 @@ class ProductListDataSource: NSObject, UITableViewDataSource {
 
 extension ProductListDataSource: ProductListViewModelObserver {
     func didSuccessfullyFetchProduct() {
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
-        }
+//        DispatchQueue.main.async {
+//            self.tableView?.reloadData()
+//        }
+        
+        observer?.didSuccessfullyFetchNewProducts()
     }
     
     func didFinishDownloadImageAt(indexPath: NSIndexPath) {
-        DispatchQueue.main.async {
-            self.tableView?.reloadRows(at: [indexPath as IndexPath], with: .none)
-        }
+        observer?.didFinishDownloadingImageAtIndexPath(indexPath: indexPath)
+//        DispatchQueue.main.async {
+//            self.tableView?.reloadRows(at: [indexPath as IndexPath], with: .none)
+//        }
     }
 }
 

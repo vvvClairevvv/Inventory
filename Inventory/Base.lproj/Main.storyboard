@@ -101,17 +101,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eW4-Qr-ICo" userLabel="Loading Label">
+                                <color key="backgroundColor" red="1" green="0.69405384991019325" blue="0.27954909569958164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="gD1-mg-X2n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eW4-Qr-ICo" secondAttribute="bottom" id="0NJ-Sw-8Xr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iy9-iy-toC" secondAttribute="bottom" id="9G1-Al-oRC"/>
+                            <constraint firstAttribute="trailing" secondItem="eW4-Qr-ICo" secondAttribute="trailing" id="GZR-s7-lTx"/>
                             <constraint firstItem="iy9-iy-toC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="edr-3j-Sr8"/>
                             <constraint firstAttribute="trailing" secondItem="iy9-iy-toC" secondAttribute="trailing" id="eeg-rJ-u8F"/>
                             <constraint firstItem="iy9-iy-toC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n2x-yR-hem"/>
+                            <constraint firstItem="eW4-Qr-ICo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zcA-m2-kQi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9mC-Um-ahg"/>
                     <connections>
+                        <outlet property="loadingLabel" destination="eW4-Qr-ICo" id="mmp-BU-hpq"/>
                         <outlet property="tableView" destination="iy9-iy-toC" id="MEj-Bt-i5Z"/>
                     </connections>
                 </viewController>
@@ -264,7 +277,7 @@
                                     <constraint firstAttribute="bottom" secondItem="fQa-0B-pmm" secondAttribute="bottom" id="zsA-tB-Wz5"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMx-lX-JIC" userLabel="Loading View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMx-lX-JIC" userLabel="Loading View">
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoD-LS-o07">
                                         <frame key="frameInset" minX="89" minY="278" width="197" height="21"/>

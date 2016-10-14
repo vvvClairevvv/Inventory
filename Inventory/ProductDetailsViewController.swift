@@ -89,10 +89,4 @@ class ProductDetailsViewController: UIViewController {
             return "rating: 0 /5.0 (0)"
         }
     }
-    
-    
-    
-
 }
-
-

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ProductListViewController: UIViewController, UITableViewDelegate{
+class ProductListViewController: UIViewController, UITableViewDelegate, ProductListDataSourceObserver{
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.estimatedRowHeight = 72
             self.tableView.rowHeight = UITableViewAutomaticDimension
         }
     }
+    @IBOutlet weak var loadingLabel: UILabel!
     
     lazy var dataSouorce: ProductListDataSource  = {return ProductListDataSource(tableView: self.tableView)}()
     
@@ -22,14 +23,17 @@ class ProductListViewController: UIViewController, UITableViewDelegate{
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.dataSource = self.dataSouorce
+        self.dataSouorce.observer = self
         self.tableView.delegate = self
         self.dataSouorce.startFetching()
-
-
     }
     
-    func updateResult(result: ProductRetrieveResult?) {
-        
+    func showLoading() {
+        self.loadingLabel.isHidden = false
+    }
+    
+    func hiddLoading() {
+        self.loadingLabel.isHidden = true
     }
     
     //MARK: UITableViewDelegate
@@ -48,6 +52,24 @@ class ProductListViewController: UIViewController, UITableViewDelegate{
         
         vc.currentItemIndex = indexPath.row
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    //MARK: ProductListDataSourceObserver
+    func didSuccessfullyFetchNewProducts() {
+        DispatchQueue.main.async {
+            self.hiddLoading()
+            self.tableView?.reloadData()
+        }
+    }
+    func didFinishDownloadingImageAtIndexPath(indexPath: NSIndexPath) {
+        DispatchQueue.main.async {
+            self.tableView?.reloadRows(at: [indexPath as IndexPath], with: .none)
+        }
+
+    }
+    
+    func didInitiateDownloading() {
+        showLoading()
     }
 }
 

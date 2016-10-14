@@ -37,13 +37,11 @@ class ImageDownloader: AnyObject {
                 
                 completionHandler(downloadImage)
                 
-
             })
             
             downloadTask.resume()
         }
     }
-    
     
     private func localPathForUrl(imageURLString: String) -> NSURL? {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString

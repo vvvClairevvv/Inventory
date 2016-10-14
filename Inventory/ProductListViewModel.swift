@@ -34,7 +34,6 @@ class ProductListViewModel {
     func loadNextBatchOfProducts() {
         if (fetcher.hasNextPage && !fetcher.isFetching) {
             fetcher.fetchNextBatch(successHandler: {(result: ProductRetrieveResult?) in
-//                self.updateProductModelOnSuccessWithResult(result: result)
                 self.observer?.didSuccessfullyFetchProduct()
                 }, failureHandler: { (error) in
                     print(error)
